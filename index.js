@@ -48,6 +48,15 @@ app.get("/notes/:project", (req,res)=>{
   res.send(projectNotes);
 })
 
+// GET note by ID
+app.get("/notes/:id", (req, res) => {
+  const note = notes.find((n) => n.id === parseInt(req.params.id));
+  if (!note) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+  res.json(post);
+});
+
 // POST a new note
 app.post("/notes", (req, res) => {
   const newId = notes.length += 1;
@@ -69,22 +78,20 @@ app.patch("/notes/:id", (req, res) => {
   if (!note){
     return res.status(404).json({ message: "Note not found" });
   }
-  else{
-    if (req.body.project) {
-      note.project = req.body.project;
-    }
-    if (req.body.title) {
-      note.title = req.body.title;
-    }
-    if (req.body.content) {
-      note.content = req.body.content;
-    }
-    if (req.body.person) {
-      note.person = req.body.person;
-    }
-    if (req.body.category) {
-      note.category = req.body.category;
-    }
+  if (req.body.project) {
+    note.project = req.body.project;
+  }
+  if (req.body.title) {
+    note.title = req.body.title;
+  }
+  if (req.body.content) {
+    note.content = req.body.content;
+  }
+  if (req.body.person) {
+    note.person = req.body.person;
+  }
+  if (req.body.category) {
+    note.category = req.body.category;
   }
   res.json(note);
 });
@@ -95,10 +102,9 @@ app.delete("/notes/:id", (req, res) => {
   const index = notes.findIndex((n) => n.id === parseInt(req.params.id));
   if (index === -1) {
     return res.status(404).json({ message: "Note not found" });
-  }else{
+  }
   notes.splice(index, 1);
   res.json({ message: "Note deleted" });
-  }
 });
 
 app.listen(port, () => {
