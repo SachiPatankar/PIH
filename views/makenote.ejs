@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Blog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+  <div class="container-note">
+    <h1>
+      <%= heading %>
+    </h1>
+
+    <% if (locals.note) { %>
+      <form id="editForm" method="post" action="/editnote/<%=note._id%>">
+        <input type="text" name="title" value="<%=note.title %>">
+        <textarea id="content" rows="10"><%=note.content %></textarea>
+        <input type="text" name="project" value="<%=note.project %>">
+        <input type="text" name="person" value="<%=note.person %>">
+        <button class="full-width" type="submit">
+          <%= submit %>
+        </button>
+      </form>
+      <% } else {%>
+        <form id="newPostForm" method="post" action="/newnote">
+          <input type="text" name="title" placeholder="Title" required>
+          <textarea name="content" placeholder="Content" required rows="10"></textarea>
+          <input type="text" name="project" placeholder="Project" required>
+          <input type="text" name="person" placeholder="Person" required>
+          <button class="full-width" type="submit">
+            <%= submit %>
+          </button>
+        </form>
+        <% } %>
+
+  </div>
+</body>
+
+</html>
