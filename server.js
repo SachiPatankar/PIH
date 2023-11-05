@@ -95,10 +95,6 @@ app.get("/deletenote/:id", async(req,res) =>{
 });
 
 
-
-
-
-
 app.listen(port, () => {
   console.log(`Backend server is running on http://localhost:${port}`);
 });
