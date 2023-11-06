@@ -4,7 +4,7 @@ This website helps teams and individuals to manage thier tasks efficiently.
 
 ## Installation
 
-After forking the repo do the following steps:
+After forking the main branch do the following steps:
 1. In terminal run command 'npm i' to install any required dependencies
 2. Run 'nodemon index.js' to start the API on port 4000
 3. Run 'nodemon server.js' to start the server on port 3000
