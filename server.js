@@ -15,6 +15,16 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+// Route to note making page for new note
+app.get("/new", async (req, res) => {
+  try {
+    res.render(note_ejs, { heading: "New Note", submit: "Create Note" });
+  } catch (error) {
+    res.status(500).json({ message: "Error rendering the new note page" });
+  }
+});
+
 // Route to render the main page (my actions page)
 app.get("/", async (req, res) => {
   try {
@@ -31,17 +41,13 @@ app.get("/:project", async (req,res) =>{
   try {
     const response = await axios.get(`${API_URL}/notes/${req.params.project}`);
     // console.log(response);
-    res.render(project_page_ejs, { notes: response.data });
+    res.render(project_page_ejs, { notes: response.data, pageHeader : req.params.project});
   } catch (error) {
     res.json({ message: "Error fetching your notes" });
   }
 
 });
 
-// Route to note making page for new note
-app.get("/new", (req, res) => {
-  res.render(note_ejs, { heading: "New Note", submit: "Create Note" });
-});
 
 //Route to note making page for editing a note
 app.get("/edit/:id", async (req, res) => {
@@ -50,8 +56,8 @@ app.get("/edit/:id", async (req, res) => {
     const response = await axios.post(`${API_URL}/notes/${req.params.id}`);
     // console.log(response.data);
     res.render(note_ejs, {
-      heading: "Edit Post",
-      submit: "Update Post",
+      heading: "Edit Note",
+      submit: "Update Note",
       note: response.data,
     });
   } catch (error) {

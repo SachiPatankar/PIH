@@ -15,21 +15,32 @@
     </h1>
 
     <% if (locals.note) { %>
-      <form id="editForm" method="post" action="/editnote/<%=note._id%>">
+      <form method="post" action="/editnote/<%=note._id%>">
         <input type="text" name="title" value="<%=note.title %>">
         <textarea id="content" rows="10"><%=note.content %></textarea>
         <input type="text" name="project" value="<%=note.project %>">
         <input type="text" name="person" value="<%=note.person %>">
+        <select name="category">
+          <option value="Unstarted" <%= note.category === 'Unstarted' ? 'selected' : '' %>>Unstarted</option>
+          <option value="In-progress" <%= note.category === 'In-progress' ? 'selected' : '' %>>In-progress</option>
+          <option value="Completed" <%= note.category === 'Completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+        
         <button class="full-width" type="submit">
           <%= submit %>
         </button>
       </form>
       <% } else {%>
-        <form id="newPostForm" method="post" action="/newnote">
+        <form method="post" action="/newnote">
           <input type="text" name="title" placeholder="Title" required>
           <textarea name="content" placeholder="Content" required rows="10"></textarea>
           <input type="text" name="project" placeholder="Project" required>
           <input type="text" name="person" placeholder="Person" required>
+          <select name="category">
+            <option value="Unstarted">Unstarted</option>
+            <option value="In-progress">In-progress</option>
+            <option value="Completed">Completed</option>
+          </select>
           <button class="full-width" type="submit">
             <%= submit %>
           </button>

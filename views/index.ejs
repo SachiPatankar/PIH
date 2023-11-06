@@ -54,7 +54,7 @@
 
         <div class="container">
           <h1 class="category-header">Unstarted</h1>
-          <ul id="unstartedNotesList">
+          <ul>
             <% notes.forEach(note => { %>
               <% if (note.category === 'Unstarted') { %>
                 <li>
@@ -73,7 +73,7 @@
 
         <div class="container">
           <h1 class="category-header">In progress</h1>
-          <ul id="unstartedNotesList">
+          <ul>
             <% notes.forEach(note => { %>
               <% if (note.category === 'In-progress') { %>
                 <li>
@@ -91,7 +91,7 @@
         
         <div class="container">
           <h1 class="category-header">Completed</h1>
-          <ul id="unstartedNotesList">
+          <ul>
             <% notes.forEach(note => { %>
               <% if (note.category === 'Completed') { %>
                 <li>
