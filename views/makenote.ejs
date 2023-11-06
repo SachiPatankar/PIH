@@ -18,7 +18,14 @@
       <form method="post" action="/editnote/<%=note._id%>">
         <input type="text" name="title" value="<%=note.title %>">
         <textarea id="content" rows="10"><%=note.content %></textarea>
-        <input type="text" name="project" value="<%=note.project %>">
+
+        <select name="project">
+          <option value="Spring Campaign" <%= note.project === 'Spring Campaign' ? 'selected' : '' %>>Spring Campaign</option>
+          <option value="Product Launch" <%= note.project === 'Product Launch' ? 'selected' : '' %>>Product Launch</option>
+        </select>
+
+        <!-- <input type="text" name="project" value="<%=note.project %>"> -->
+        
         <input type="text" name="person" value="<%=note.person %>">
         <select name="category">
           <option value="Unstarted" <%= note.category === 'Unstarted' ? 'selected' : '' %>>Unstarted</option>
@@ -30,11 +37,18 @@
           <%= submit %>
         </button>
       </form>
+
       <% } else {%>
         <form method="post" action="/newnote">
           <input type="text" name="title" placeholder="Title" required>
           <textarea name="content" placeholder="Content" required rows="10"></textarea>
-          <input type="text" name="project" placeholder="Project" required>
+
+          <select name="project">
+            <option value="Spring Campaign">Spring Campaign</option>
+            <option value="Product Launch">Product Launch</option>
+          </select>
+          <!-- <input type="text" name="project" placeholder="Project" required> -->
+
           <input type="text" name="person" placeholder="Person" required>
           <select name="category">
             <option value="Unstarted">Unstarted</option>
